@@ -9,14 +9,14 @@ const emailInput = document.getElementById('email');
 // Variável para acompanhar o índice do contato em edição
 let editingContactIndex = -1;
 
-// Funções para manipulação dos dados 
-//===================================//
 // Função para validar CPF
 function validateCPF(cpf) {
-    cpf = cpf.replace(/\D/g, ''); // Remove caracteres não numéricos
+
+    // Remove caracteres não numéricos
+    cpf = cpf.replace(/\D/g, ''); 
 
     if (cpf.length !== 11) {
-        return false; // O CPF deve ter 11 dígitos
+        return false; // 
     }
 
     // Verifica se todos os dígitos são iguais (números comuns de CPF inválidos)
@@ -61,32 +61,11 @@ function validateCPF(cpf) {
 }
 
 // Funções para manipulação dos dados 
+//===================================//
 
 // Adicionar um novo contato
 function addContact(name, cpf, phone, email) {
-    // Verifique se o número de telefone tem pelo menos 8 dígitos
-    if (phone.replace(/\D/g, '').length < 8) {
-        alert('O número de telefone deve ter pelo menos 8 dígitos.');
-        return;
-    }
 
-    // Verifique se o CPF é válido
-    if (!validateCPF(cpf)) {
-        alert('CPF inválido.');
-        return;
-    }
-
-    const contactList = JSON.parse(localStorage.getItem('contacts')) || [];
-    contactList.push({ name, cpf, phone, email });
-    localStorage.setItem('contacts', JSON.stringify(contactList));
-    listContacts();
-    clearForm();
-}
-
-
-// Adicionar um novo contato
-function addContact(name, cpf, phone, email) {
-    // Verifique se o número de telefone tem pelo menos 8 dígitos
     if (phone.replace(/\D/g, '').length < 8) {
         alert('O número de telefone deve ter pelo menos 8 dígitos.');
         return;
@@ -133,25 +112,19 @@ function updateContact(name, cpf, phone, email) {
 
 // Editar um contato existente
 function editContact(index) {
-    // Obtenha a lista de contatos do armazenamento local ou crie uma lista vazia
     const contactList = JSON.parse(localStorage.getItem('contacts')) || [];
 
-    // Obtenha o contato específico com base no índice fornecido
     const contact = contactList[index];
 
-    // Se o contato não existir, saia da função
     if (!contact) return;
 
-    // Preencha os campos de entrada com os valores do contato selecionado
     nameInput.value  = contact.name;
     cpfInput.value   = contact.cpf;
     phoneInput.value = contact.phone;
     emailInput.value = contact.email;
 
-    // Defina o índice de edição para o contato em questão
     editingContactIndex = index;
 
-    // Altere o texto do botão de envio do formulário para 'Alterar'
     const addButton = document.querySelector('form button');
     addButton.textContent = 'Alterar';
 }
@@ -166,18 +139,12 @@ function deleteContact(index) {
 
 // Listar os contatos na tabela
 function listContacts() {
-    // Obtenha a lista de contatos do armazenamento local ou crie uma lista vazia
     const contactList = JSON.parse(localStorage.getItem('contacts')) || [];
-
-    // Obtenha uma referência à tabela de contatos no HTML
     const contactTable = document.getElementById('contact-list');
 
-    // Limpe o conteúdo atual da tabela
     contactTable.innerHTML = '';
 
-    // Itere sobre cada contato na lista
     contactList.forEach((contact, index) => {
-        // Crie uma nova linha na tabela
         const row = contactTable.insertRow();
 
         // Crie células para o nome, telefone, e-mail e ações do contato
@@ -233,51 +200,13 @@ function filterContacts() {
 }
 
 // Eventos
+//===========================================//
 
 // Event listener para o campo de telefone
 phoneInput.addEventListener('input', () => {
     formatPhoneNumber(phoneInput);
 });
 
-// Event listener para o formulário de adicionar contato
-// document.getElementById('contact-form').addEventListener('submit', async (e) => {
-//     e.preventDefault();
-
-//     const name = nameInput.value;
-//     const cpf = cpfInput.value;
-//     const phone = phoneInput.value;
-//     const email = emailInput.value;
-
-//     if (editingContactIndex === -1) {
-//         addContact(name, cpf, phone, email); // Chame a função addContact para adicionar um novo contato
-
-//         // Agora, aqui você pode enviar os dados para o serviço de envio de email
-//         try {
-//             const response = await fetch('https://formspree.io/f/seu_endpoint_aqui', {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                 },
-//                 body: JSON.stringify({
-//                     name,
-//                     email,
-//                 }),
-//             });
-
-//             if (response.ok) {
-//                 // Dados enviados com sucesso, você pode mostrar uma mensagem de sucesso aqui
-//                 console.log('Dados enviados com sucesso!');
-//             } else {
-//                 // Algo deu errado no envio, você pode mostrar uma mensagem de erro aqui
-//                 console.error('Erro ao enviar os dados.');
-//             }
-//         } catch (error) {
-//             console.error('Erro ao enviar os dados:', error);
-//         }
-//     } else {
-//         updateContact(name, cpf, phone, email); // Chame a função updateContact para atualizar o contato existente
-//     }
-// });
 // Event listener para o formulário de adicionar contato
 document.getElementById('contact-form').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -288,41 +217,19 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
     const email = emailInput.value;
 
     if (editingContactIndex === -1) {
-        // Agora, aqui você pode enviar os dados para o serviço de envio de email
-        try {
-            const emailResponse = await fetch('https://formspree.io/f/seu_endpoint_aqui', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name,
-                    email,
-                }),
-            });
-
-            if (emailResponse.ok) {
-                // Dados de "Nome" e "Email" enviados com sucesso, você pode mostrar uma mensagem de sucesso aqui
-                console.log('Dados de "Nome" e "Email" enviados com sucesso!');
-            } else {
-                // Algo deu errado no envio de "Nome" e "Email", você pode mostrar uma mensagem de erro aqui
-                console.error('Erro ao enviar os dados de "Nome" e "Email".');
-            }
-        } catch (error) {
-            console.error('Erro ao enviar os dados de "Nome" e "Email":', error);
-        }
-
         addContact(name, cpf, phone, email); // Chame a função addContact para adicionar um novo contato
-    } else {
+
+    }else {
         updateContact(name, cpf, phone, email); // Chame a função updateContact para atualizar o contato existente
     }
 });
-
 
 // Event listener para o campo de pesquisa
 document.getElementById('search').addEventListener('input', filterContacts);
 
 // Funções relacionadas à interface do usuário
+//=============================================//
+
 function clearForm() {
     nameInput.value = '';
     cpfInput.value = '';
@@ -371,13 +278,9 @@ function formatCPF(cpf) {
 
 // Event listener para o campo de CPF
 cpfInput.addEventListener('input', () => {
-    // Obtém o valor atual do campo
+
     let cpf = cpfInput.value;
-
-    // Formata o valor com a máscara
     cpf = formatCPF(cpf);
-
-    // Define o valor formatado de volta no campo
     cpfInput.value = cpf;
 });
 
