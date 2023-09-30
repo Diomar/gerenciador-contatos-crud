@@ -1,3 +1,5 @@
+
+
 // Variáveis para referenciar elementos do formulário
 const nameInput  = document.getElementById('name');
 const cpfInput   = document.getElementById('cpf');
@@ -238,6 +240,45 @@ phoneInput.addEventListener('input', () => {
 });
 
 // Event listener para o formulário de adicionar contato
+// document.getElementById('contact-form').addEventListener('submit', async (e) => {
+//     e.preventDefault();
+
+//     const name = nameInput.value;
+//     const cpf = cpfInput.value;
+//     const phone = phoneInput.value;
+//     const email = emailInput.value;
+
+//     if (editingContactIndex === -1) {
+//         addContact(name, cpf, phone, email); // Chame a função addContact para adicionar um novo contato
+
+//         // Agora, aqui você pode enviar os dados para o serviço de envio de email
+//         try {
+//             const response = await fetch('https://formspree.io/f/seu_endpoint_aqui', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json',
+//                 },
+//                 body: JSON.stringify({
+//                     name,
+//                     email,
+//                 }),
+//             });
+
+//             if (response.ok) {
+//                 // Dados enviados com sucesso, você pode mostrar uma mensagem de sucesso aqui
+//                 console.log('Dados enviados com sucesso!');
+//             } else {
+//                 // Algo deu errado no envio, você pode mostrar uma mensagem de erro aqui
+//                 console.error('Erro ao enviar os dados.');
+//             }
+//         } catch (error) {
+//             console.error('Erro ao enviar os dados:', error);
+//         }
+//     } else {
+//         updateContact(name, cpf, phone, email); // Chame a função updateContact para atualizar o contato existente
+//     }
+// });
+// Event listener para o formulário de adicionar contato
 document.getElementById('contact-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -247,11 +288,9 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
     const email = emailInput.value;
 
     if (editingContactIndex === -1) {
-        addContact(name, cpf, phone, email); // Chame a função addContact para adicionar um novo contato
-
         // Agora, aqui você pode enviar os dados para o serviço de envio de email
         try {
-            const response = await fetch('https://formspree.io/f/seu_endpoint_aqui', {
+            const emailResponse = await fetch('https://formspree.io/f/seu_endpoint_aqui', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -262,16 +301,18 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
                 }),
             });
 
-            if (response.ok) {
-                // Dados enviados com sucesso, você pode mostrar uma mensagem de sucesso aqui
-                console.log('Dados enviados com sucesso!');
+            if (emailResponse.ok) {
+                // Dados de "Nome" e "Email" enviados com sucesso, você pode mostrar uma mensagem de sucesso aqui
+                console.log('Dados de "Nome" e "Email" enviados com sucesso!');
             } else {
-                // Algo deu errado no envio, você pode mostrar uma mensagem de erro aqui
-                console.error('Erro ao enviar os dados.');
+                // Algo deu errado no envio de "Nome" e "Email", você pode mostrar uma mensagem de erro aqui
+                console.error('Erro ao enviar os dados de "Nome" e "Email".');
             }
         } catch (error) {
-            console.error('Erro ao enviar os dados:', error);
+            console.error('Erro ao enviar os dados de "Nome" e "Email":', error);
         }
+
+        addContact(name, cpf, phone, email); // Chame a função addContact para adicionar um novo contato
     } else {
         updateContact(name, cpf, phone, email); // Chame a função updateContact para atualizar o contato existente
     }
