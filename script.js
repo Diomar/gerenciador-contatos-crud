@@ -258,8 +258,6 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
                 },
                 body: JSON.stringify({
                     name,
-                    cpf,
-                    phone,
                     email,
                 }),
             });
