@@ -6,59 +6,15 @@ const cpfInput   = document.getElementById('cpf');
 const phoneInput = document.getElementById('phone');
 const emailInput = document.getElementById('email');
 
+// Variaveis do modal ediatar 
+const editName  = document.getElementById('editName');
+const editCpf   = document.getElementById('editCpf');
+const editPhone = document.getElementById('editPhone');
+const editEmail = document.getElementById('editEmail');
+
 // Variável para acompanhar o índice do contato em edição
 let editingContactIndex = -1;
 
-// Função para validar CPF
-function validateCPF(cpf) {
-
-    // Remove caracteres não numéricos
-    cpf = cpf.replace(/\D/g, ''); 
-
-    if (cpf.length !== 11) {
-        return false; // 
-    }
-
-    // Verifica se todos os dígitos são iguais (números comuns de CPF inválidos)
-    if (/^(\d)\1{10}$/.test(cpf)) {
-        return false;
-    }
-
-    let sum = 0;
-    let remainder;
-
-    // Calcula o primeiro dígito verificador
-    for (let i = 1; i <= 9; i++) {
-        sum += parseInt(cpf[i - 1]) * (11 - i);
-    }
-    remainder = (sum * 10) % 11;
-
-    if (remainder === 10 || remainder === 11) {
-        remainder = 0;
-    }
-
-    if (remainder !== parseInt(cpf[9])) {
-        return false;
-    }
-
-    sum = 0;
-
-    // Calcula o segundo dígito verificador
-    for (let i = 1; i <= 10; i++) {
-        sum += parseInt(cpf[i - 1]) * (12 - i);
-    }
-    remainder = (sum * 10) % 11;
-
-    if (remainder === 10 || remainder === 11) {
-        remainder = 0;
-    }
-
-    if (remainder !== parseInt(cpf[10])) {
-        return false;
-    }
-
-    return true; // CPF válido
-}
 
 // Funções para manipulação dos dados 
 //===================================//
@@ -110,7 +66,7 @@ function updateContact(name, cpf, phone, email) {
     }
 }
 
-// Editar um contato existente
+// Editar um contato existente *
 function editContact(index) {
     const contactList = JSON.parse(localStorage.getItem('contacts')) || [];
 
@@ -118,15 +74,53 @@ function editContact(index) {
 
     if (!contact) return;
 
-    nameInput.value  = contact.name;
-    cpfInput.value   = contact.cpf;
-    phoneInput.value = contact.phone;
-    emailInput.value = contact.email;
+    editName.value  = contact.name;
+    editCpf.value   = contact.cpf;
+    editPhone.value = contact.phone;
+    editEmail.value = contact.email;
 
     editingContactIndex = index;
+    const editModal = document.querySelector('.editModal');
+    editModal.style.display = 'block';
+    
+    const closeButton = document.getElementById('closeModal');
+    closeButton.addEventListener('click', () => {
+        // Feche o modal ao clicar no botão "Fechar"
+        editModal.style.display = 'none';
+    });
+    
+    console.log('Botão edidar acionado')
+    console.log('modal ligada')
 
-    const addButton = document.querySelector('form button');
-    addButton.textContent = 'Alterar';
+    // Após abrir o modal, atribua um evento de clique ao botão de salvar
+    document.getElementById('saveEdit').addEventListener('click', () => {
+        
+    // Obtém os valores dos campos de edição do modal
+    const editedName  = editName.value;
+    const editedCpf   = editCpf.value;
+    const editedPhone = editPhone.value;
+    const editedEmail = editEmail.value;
+
+    // Realize as mesmas validações que você fez para adicionar um novo contato
+    if (editedPhone.replace(/\D/g, '').length < 8) {
+        alert('O número de telefone deve ter pelo menos 8 dígitos.');
+        return;
+    }
+
+    // Verifique se o CPF é válido
+    if (!validateCPF(editedCpf)) {
+        alert('CPF inválido.');
+        return;
+    }
+
+    // Atualize o contato existente com as informações editadas
+    updateContact(editedName, editedCpf, editedPhone, editedEmail);
+    
+    // Feche o modal de edição
+    const editModal = document.querySelector('.editModal');
+    editModal.style.display = 'none';
+});
+
 }
 
 // Excluir um contato
@@ -160,12 +154,13 @@ function listContacts() {
         phoneCell.textContent = contact.phone;
         emailCell.textContent = contact.email;
 
-        // Crie botões de "Editar" e "Excluir" para cada contato
+        // Cria os botões de "Editar" e "Excluir" para cada contato
         const editButton = document.createElement('button');
         editButton.textContent = 'Editar';
         editButton.className   = 'edit';
         editButton.addEventListener('click', () => editContact(index));
 
+        // 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Excluir';
         deleteButton.className   = 'delete';
@@ -211,8 +206,8 @@ phoneInput.addEventListener('input', () => {
 document.getElementById('contact-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const name = nameInput.value;
-    const cpf = cpfInput.value;
+    const name  = nameInput.value;
+    const cpf   = cpfInput.value;
     const phone = phoneInput.value;
     const email = emailInput.value;
 
@@ -276,11 +271,63 @@ function formatCPF(cpf) {
     return cpf;
 }
 
+
 // Event listener para o campo de CPF
 cpfInput.addEventListener('input', () => {
 
     let cpf = cpfInput.value;
+
     cpf = formatCPF(cpf);
     cpfInput.value = cpf;
 });
 
+// Função para validar CPF
+function validateCPF(cpf) {
+
+    // Remove caracteres não numéricos
+    cpf = cpf.replace(/\D/g, ''); 
+
+    if (cpf.length !== 11) {
+        return false; // 
+    }
+
+    // Verifica se todos os dígitos são iguais (números comuns de CPF inválidos)
+    if (/^(\d)\1{10}$/.test(cpf)) {
+        return false;
+    }
+
+    let sum = 0;
+    let remainder;
+
+    // Calcula o primeiro dígito verificador
+    for (let i = 1; i <= 9; i++) {
+        sum += parseInt(cpf[i - 1]) * (11 - i);
+    }
+    remainder = (sum * 10) % 11;
+
+    if (remainder === 10 || remainder === 11) {
+        remainder = 0;
+    }
+
+    if (remainder !== parseInt(cpf[9])) {
+        return false;
+    }
+
+    sum = 0;
+
+    // Calcula o segundo dígito verificador
+    for (let i = 1; i <= 10; i++) {
+        sum += parseInt(cpf[i - 1]) * (12 - i);
+    }
+    remainder = (sum * 10) % 11;
+
+    if (remainder === 10 || remainder === 11) {
+        remainder = 0;
+    }
+
+    if (remainder !== parseInt(cpf[10])) {
+        return false;
+    }
+
+    return true; // CPF válido
+}
