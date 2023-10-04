@@ -66,11 +66,16 @@ function updateContact(name, cpf, phone, email) {
     }
 }
 
+
+
+
+
+
 // Editar um contato existente *
 function editContact(index) {
     const contactList = JSON.parse(localStorage.getItem('contacts')) || [];
-
     const contact = contactList[index];
+    const editModal = document.querySelector('.editModal');
 
     if (!contact) return;
 
@@ -80,37 +85,60 @@ function editContact(index) {
     editEmail.value = contact.email;
 
     editingContactIndex = index;
-    const editModal = document.querySelector('.editModal');
+    
     editModal.style.display = 'block';
-    
-    const closeButton = document.getElementById('closeModal');
-    closeButton.addEventListener('click', () => {
-        // Feche o modal ao clicar no botão "Fechar"
-        editModal.style.display = 'none';
-    });
-    
-    console.log('Botão edidar acionado')
-    console.log('modal ligada')
 
-    // Após abrir o modal, atribua um evento de clique ao botão de salvar
-    document.getElementById('saveEdit').addEventListener('click', () => {
-        
-    // Obtém os valores dos campos de edição do modal
+    const fechaModalElement = document.querySelector('.fechaModal');
+    const btnCancelar = document.getElementById('btnCancelar');
+    
+    function fechaModal() {
+        editModal.style.display = 'none';
+    }
+    
+    // Adicione eventos de clique para ambos os elementos
+    fechaModalElement.addEventListener('click', fechaModal)
+    btnCancelar.addEventListener('click', fechaModal);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+    const salvarAlteracoes = document.getElementById("salvarAlteracoes")
+
+// Evento de clique do botão para salvar alterações
+salvarAlteracoes.addEventListener('click', () => {
+    // Obtém os valores dos campos a serem editados
     const editedName  = editName.value;
     const editedCpf   = editCpf.value;
     const editedPhone = editPhone.value;
     const editedEmail = editEmail.value;
 
-    // Realize as mesmas validações que você fez para adicionar um novo contato
-    if (editedPhone.replace(/\D/g, '').length < 8) {
-        alert('O número de telefone deve ter pelo menos 8 dígitos.');
-        return;
+    // Validação do campo Nome
+    if (editedName.trim() === '') {
+        alert('O campo Nome não pode estar vazio.');
+        return; // Impede a execução do código após o alerta
     }
 
-    // Verifique se o CPF é válido
+    // Validação do campo CPF
     if (!validateCPF(editedCpf)) {
         alert('CPF inválido.');
-        return;
+        return; // Impede a execução do código após o alerta
+    }
+
+    // Validação do campo Telefone
+    if (editedPhone.replace(/\D/g, '').length < 8) {
+        alert('O número de telefone deve ter pelo menos 8 dígitos.');
+        return; // Impede a execução do código após o alerta
     }
 
     // Atualize o contato existente com as informações editadas
@@ -119,9 +147,37 @@ function editContact(index) {
     // Feche o modal de edição
     const editModal = document.querySelector('.editModal');
     editModal.style.display = 'none';
+
+    // Remova o ouvinte de evento após a execução bem-sucedida
+    salvarAlteracoes.removeEventListener('click', onClickSalvarAlteracoes);
 });
 
+// Função a ser usada como referência para o ouvinte de evento
+function onClickSalvarAlteracoes() {
+    // Coloque o código anterior aqui
 }
+
+// Associe a função de referência ao evento de clique
+salvarAlteracoes.addEventListener('click', onClickSalvarAlteracoes);
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
 
 // Excluir um contato
 function deleteContact(index) {
@@ -202,7 +258,7 @@ phoneInput.addEventListener('input', () => {
     formatPhoneNumber(phoneInput);
 });
 
-// Event listener para o formulário de adicionar contato
+// Event listener para o formulário Adicionar contato
 document.getElementById('contact-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
