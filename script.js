@@ -22,14 +22,20 @@ let editingContactIndex = -1;
 // Adicionar um novo contato
 function addContact(name, cpf, phone, email) {
 
-    if (phone.replace(/\D/g, '').length < 8) {
-        alert('O número de telefone deve ter pelo menos 8 dígitos.');
+     // Realize as validações aqui
+     if (!validateName(name)) {
+        alert('Nome inválido.');
         return;
     }
 
     // Verifique se o CPF é válido
     if (!validateCPF(cpf)) {
         alert('CPF inválido.');
+        return;
+    }
+
+    if (!validatePhone(phone)) {
+        alert('Telefone inválido.');
         return;
     }
 
@@ -46,7 +52,6 @@ function addContact(name, cpf, phone, email) {
     listContacts();
     clearForm();
 }
-
 
 // Atualizar um contato existente
 function updateContact(name, cpf, phone, email) {
@@ -66,16 +71,13 @@ function updateContact(name, cpf, phone, email) {
     }
 }
 
-
-
-
-
-
 // Editar um contato existente *
 function editContact(index) {
+    
     const contactList = JSON.parse(localStorage.getItem('contacts')) || [];
     const contact = contactList[index];
     const editModal = document.querySelector('.editModal');
+    
 
     if (!contact) return;
 
@@ -99,85 +101,53 @@ function editContact(index) {
     fechaModalElement.addEventListener('click', fechaModal)
     btnCancelar.addEventListener('click', fechaModal);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Em desenvolvimento========================================================================================================
    
-    const salvarAlteracoes = document.getElementById("salvarAlteracoes")
+    const salvarAlteracoes = document.getElementById("salvarAlteracoes");
 
-// Evento de clique do botão para salvar alterações
-salvarAlteracoes.addEventListener('click', () => {
-    // Obtém os valores dos campos a serem editados
-    const editedName  = editName.value;
-    const editedCpf   = editCpf.value;
-    const editedPhone = editPhone.value;
-    const editedEmail = editEmail.value;
-
-    // Validação do campo Nome
-    if (editedName.trim() === '') {
-        alert('O campo Nome não pode estar vazio.');
-        return; // Impede a execução do código após o alerta
-    }
-
-    // Validação do campo CPF
-    if (!validateCPF(editedCpf)) {
-        alert('CPF inválido.');
-        return; // Impede a execução do código após o alerta
-    }
-
-    // Validação do campo Telefone
-    if (editedPhone.replace(/\D/g, '').length < 8) {
-        alert('O número de telefone deve ter pelo menos 8 dígitos.');
-        return; // Impede a execução do código após o alerta
-    }
-
-    // Atualize o contato existente com as informações editadas
-    updateContact(editedName, editedCpf, editedPhone, editedEmail);
+    function onClickSalvarAlteracoes() {
+        // Obtém os valores dos campos a serem editados
+        const editedName  = editName.value;
+        const editedCpf   = editCpf.value;
+        const editedPhone = editPhone.value;
+        const editedEmail = editEmail.value;
+ 
+        // Realize as validações aqui
+        if (!validateName(editedName)) {
+            alert('Nome inválido.');
+            return;
+        }
     
-    // Feche o modal de edição
-    const editModal = document.querySelector('.editModal');
-    editModal.style.display = 'none';
+        if (!validateCPF(editedCpf)) {
+            alert('CPF inválido.');
+            return;
+        }
+    
+        if (!validatePhone(editedPhone)) {
+            alert('Telefone inválido.');
+            return;
+        }
+    
+        if (!validateEmail(editedEmail)) {
+            alert('Email inválido.');
+            return;
+        }
+    
+        // Atualize o contato existente com as informações editadas
+        updateContact(editedName, editedCpf, editedPhone, editedEmail);
+        
+        // Feche o modal de edição
+        const editModal = document.querySelector('.editModal');
+        editModal.style.display = 'none';
+    
+        // Remova o ouvinte de evento após a execução bem-sucedida
+        salvarAlteracoes.removeEventListener('click', onClickSalvarAlteracoes);
+    }
+    
+    // Adicione um ouvinte de evento para o clique no botão "Salvar Alterações"
+    salvarAlteracoes.addEventListener('click', onClickSalvarAlteracoes);
 
-    // Remova o ouvinte de evento após a execução bem-sucedida
-    salvarAlteracoes.removeEventListener('click', onClickSalvarAlteracoes);
-});
-
-// Função a ser usada como referência para o ouvinte de evento
-function onClickSalvarAlteracoes() {
-    // Coloque o código anterior aqui
 }
-
-// Associe a função de referência ao evento de clique
-salvarAlteracoes.addEventListener('click', onClickSalvarAlteracoes);
-
-
-
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
 
 // Excluir um contato
 function deleteContact(index) {
@@ -253,10 +223,7 @@ function filterContacts() {
 // Eventos
 //===========================================//
 
-// Event listener para o campo de telefone
-phoneInput.addEventListener('input', () => {
-    formatPhoneNumber(phoneInput);
-});
+
 
 // Event listener para o formulário Adicionar contato
 document.getElementById('contact-form').addEventListener('submit', async (e) => {
@@ -270,7 +237,7 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
     if (editingContactIndex === -1) {
         addContact(name, cpf, phone, email); // Chame a função addContact para adicionar um novo contato
 
-    }else {
+    } else {
         updateContact(name, cpf, phone, email); // Chame a função updateContact para atualizar o contato existente
     }
 });
@@ -292,29 +259,16 @@ function clearForm() {
     addButton.textContent = 'Adicionar';
 }
 
-// Função para formatar o número de telefone
-function formatPhoneNumber(phoneInput) {
-    const phoneNumber = phoneInput.value.replace(/\D/g, '');
-
-    let formattedPhoneNumber = '';
-
-    if (phoneNumber.length > 0) {
-        formattedPhoneNumber += `(${phoneNumber.substring(0, 2)}`;
+// Função para validar o nome
+function validateName(name) {
+    if (name.trim() === '') {
+        return false; // Nome em branco, considerado inválido
     }
 
-    if (phoneNumber.length > 2) {
-        formattedPhoneNumber += `) ${phoneNumber.substring(2, 7)}`;
-    }
+    // Outras regras de validação, se necessário
 
-    if (phoneNumber.length > 7) {
-        formattedPhoneNumber += `-${phoneNumber.substring(7, 11)}`;
-    }
-
-    phoneInput.value = formattedPhoneNumber;
+    return true; // Nome válido
 }
-
-// Inicializa a lista de contatos ao carregar a página
-listContacts();
 
 // Função para formatar o CPF com uma máscara
 function formatCPF(cpf) {
@@ -326,16 +280,6 @@ function formatCPF(cpf) {
 
     return cpf;
 }
-
-
-// Event listener para o campo de CPF
-cpfInput.addEventListener('input', () => {
-
-    let cpf = cpfInput.value;
-
-    cpf = formatCPF(cpf);
-    cpfInput.value = cpf;
-});
 
 // Função para validar CPF
 function validateCPF(cpf) {
@@ -387,3 +331,75 @@ function validateCPF(cpf) {
 
     return true; // CPF válido
 }
+
+
+
+
+// Função para formatar o número de telefone
+function formatPhoneNumber(phoneInput) {
+
+    const phoneNumber = phoneInput.value.replace(/\D/g, '');
+
+    let formattedPhoneNumber = '';
+
+    if (phoneNumber.length > 0) {
+        formattedPhoneNumber += `(${phoneNumber.substring(0, 2)}`;
+    }
+
+    if (phoneNumber.length > 2) {
+        formattedPhoneNumber += `) ${phoneNumber.substring(2, 7)}`;
+    }
+
+    if (phoneNumber.length > 7) {
+        formattedPhoneNumber += `-${phoneNumber.substring(7, 11)}`;
+    }
+
+    phoneInput.value = formattedPhoneNumber;
+}
+
+// Event listener para o campo de telefone
+phoneInput.addEventListener('input', () => {
+    formatPhoneNumber(phoneInput);
+});
+
+
+// Função para validar o número de telefone
+function validatePhone(phone) {
+    // Remove todos os caracteres não numéricos
+    const numericPhone = phone.replace(/\D/g, '');
+
+    // Verifique se o número de telefone tem pelo menos 8 dígitos
+    if (numericPhone.length < 8) {
+        return false; // Número de telefone inválido
+    }
+
+    // Se necessário, você pode adicionar outras regras de validação aqui
+
+    return true; // Número de telefone válido
+}
+
+// Função para validar um endereço de e-mail
+function validateEmail(email) {
+    // Expressão regular para validar o formato do e-mail
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    // Testa o e-mail em relação à expressão regular
+    if (!emailRegex.test(email)) {
+        return false; // E-mail inválido
+    }
+
+    return true; // E-mail válido
+}
+
+// Event listener para o campo de CPF
+cpfInput.addEventListener('input', () => {
+
+    let cpf = cpfInput.value;
+
+    cpf = formatCPF(cpf);
+    cpfInput.value = cpf;
+});
+
+
+// Inicializa a lista de contatos ao carregar a página
+listContacts();
