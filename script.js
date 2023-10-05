@@ -139,7 +139,7 @@ function valida_Email(email) {
 
 //===================================//
 // Funções para manipulação dos dados 
-//==================================//
+//===================================//
 
 // Adicionar um novo contato
 function add_Contato(name, cpf, phone, email) {
@@ -308,20 +308,19 @@ function listContacts() {
         emailCell.textContent = contact.email;
 
         // Cria os botões de "Editar" e "Excluir" para cada contato
-        const editButton = document.createElement('button');
-        editButton.textContent = 'Editar';
-        editButton.className   = 'edit';
-        editButton.addEventListener('click', () => editar_Contato(index));
+        const btn_Editar = document.createElement('button');
+        btn_Editar.textContent = 'Editar';
+        btn_Editar.className   = 'btn_Editar';
+        btn_Editar.addEventListener('click', () => editar_Contato(index));
 
-        // 
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Excluir';
-        deleteButton.className   = 'delete';
-        deleteButton.addEventListener('click', () => excluir_Contato(index));
+        const btn_Excluir = document.createElement('button');
+        btn_Excluir.textContent = 'Excluir';
+        btn_Excluir.className   = 'btn_Excluir';
+        btn_Excluir.addEventListener('click', () => excluir_Contato(index));
 
         // Adicione os botões à célula de ações
-        actionsCell.appendChild(editButton);
-        actionsCell.appendChild(deleteButton);
+        actionsCell.appendChild(btn_Editar);
+        actionsCell.appendChild(btn_Excluir);
     });
 }
 

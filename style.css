@@ -78,6 +78,10 @@ input[type="email"] {
     outline: none;
 }
 
+/* =============================
+Configuração de botões  
+=============================== */
+
 button {
     padding: 10px 20px;
     background-color: #007bff;
@@ -93,21 +97,21 @@ button.adicionar:hover{
     transition:  0.3s; 
 }
 
-button.edit {
+button.btn_Editar {
     background-color: #f7b900;
     margin-right: 5px;
 }
 
-button.delete {
+button.btn_Excluir {
     background-color: #dc3545;
 }
 
-button.edit:hover {
+button.btn_Editar:hover {
     background-color: #e7ad00;
     transition:  0.3s; 
 }
 
-button.delete:hover {
+button.btn_Excluir:hover {
     background-color: #bd0719;
     transition:  0.3s; 
 }
@@ -157,7 +161,6 @@ th {
     width: 40%;
 }
 
-
 /* Estilo para o botão de fechar do modal */
 .close {
     display: flex;
@@ -179,9 +182,6 @@ th {
     text-decoration: none;
     cursor: pointer;
 }
-
-
-
 
 /* Estilos para celular (tela estreita) */
 @media (max-width: 768px) {
