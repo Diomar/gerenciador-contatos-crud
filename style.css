@@ -171,6 +171,7 @@ th {
     width: 40%;
 }
 
+
 /* Estilo para o botão de fechar do modal */
 .close {
     display: flex;
@@ -193,7 +194,7 @@ th {
     cursor: pointer;
 }
 
-.editForm{
+editForm{
     margin-top: 15px;
 }
 
