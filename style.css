@@ -7,9 +7,9 @@
   }
 
   :root {
-  --cor-primaria: #007BFF;       /* Azul primário */
+  --cor-primaria: #007BFF;      /* Azul primário */
   --cor-secundaria: #6C757D;    /* Cinza secundário */
-  --cor-fundo: #FFFFFF;          /* Branco para fundo */
+  --cor-fundo: #FFFFFF;         /* Branco para fundo */
   --cor-texto: #333333;         /* Texto principal em preto */
   --cor-destaque: #FFA500;      /* Cor de destaque (laranja) */
   --cor-sucesso: #28A745;       /* Cor para operações de sucesso (verde) */
@@ -131,20 +131,6 @@ th {
     background-color: #007bff;
 }
 
-/* Estilos para celular (tela estreita) */
-@media (max-width: 768px) {
-    .container {
-        padding: 10px;
-    }
-
-    input[type="text"],
-    input[type="tel"],
-    input[type="email"] {
-        width: 100%;
-    }
-}
-
-
 /* Estilo para o modal de edição */
 .editModal {
     display: none;
@@ -194,9 +180,18 @@ th {
     cursor: pointer;
 }
 
-editForm{
-    margin-top: 15px;
+
+
+
+/* Estilos para celular (tela estreita) */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"] {
+        width: 100%;
+    }
 }
-
-
-

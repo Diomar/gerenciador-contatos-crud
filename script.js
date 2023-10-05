@@ -142,7 +142,7 @@ function valida_Email(email) {
 //==================================//
 
 // Adicionar um novo contato
-function addContact(name, cpf, phone, email) {
+function add_Contato(name, cpf, phone, email) {
 
      // Realize as validações aqui
      if (!valida_Nome(name)) {
@@ -364,7 +364,7 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
     if (editingContactIndex === -1) {
 
         //Chama a função adicionar contato
-        addContact(name, cpf, phone, email);
+        add_Contato(name, cpf, phone, email);
 
     } else {
         // Chama a função atualizar contato 
