@@ -5,10 +5,10 @@ const tel_Input   = document.getElementById('tel');
 const email_Input = document.getElementById('email');
 
 // Referencias para elementos do modal de edição do contato
-const edita_Nome  = document.getElementById('edita_Nome')
-const edita_Cpf   = document.getElementById('edita_Cpf')
-const edita_Tel   = document.getElementById('edita_Tel')
-const edita_Email = document.getElementById('edita_Email')
+const edita_Nome  = document.getElementById('edita_Nome');
+const edita_Cpf   = document.getElementById('edita_Cpf');
+const edita_Tel   = document.getElementById('edita_Tel');
+const edita_Email = document.getElementById('edita_Email');
 
 // Variável para acompanhar o índice do contato em edição
 let editingContactIndex = -1;
@@ -400,8 +400,8 @@ function limpar_Form() {
     email_Input.value = '';
     
     // Restaure o botão "Adicionar" após a limpeza
-    const addButton = document.querySelector('form button');
-    addButton.textContent = 'Adicionar';
+    // const addButton = document.querySelector('form button');
+    // addButton.textContent = 'Adicionar';
 }
 
 // Inicializa a lista de contatos ao carregar a página

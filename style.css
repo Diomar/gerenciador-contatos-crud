@@ -6,6 +6,13 @@
     font-family: "Poppins", sans-serif;
   }
 
+body {
+    font-family: Arial, sans-serif; /* Substitua 'Arial, sans-serif' pela fonte desejada */
+    font-size: 16px; /* Defina o tamanho da fonte desejado */
+    font-weight: normal; /* Defina o peso da fonte (normal, bold, etc.) */
+    color: #333; /* Defina a cor do texto */
+}
+      
   :root {
   --cor-primaria: #007BFF;      /* Azul primário */
   --cor-secundaria: #6C757D;    /* Cinza secundário */
@@ -84,12 +91,34 @@ Configuração de botões
 
 button {
     padding: 10px 20px;
-    background-color: #007bff;
     color: #fff;
     border: none;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease-in-out;
+}
+
+button#btn_Cancelar {
+    background-color: var(--cor-secundaria);
+}
+
+button#btn_Cancelar:hover {
+    background-color: #425f7e;
+}
+
+button#salvar_Alteracoes{
+    background-color: var(--cor-primaria);
+}
+
+button#salvar_Alteracoes:hover{
+    background-color: rgb(0, 78, 245);
+}
+
+button.btn_Adicionar {
+    background-color: var(--cor-primaria);
+}
+button.btn_Adicionar:hover {
+    background-color: rgb(0, 78, 245);
 }
 
 button.adicionar:hover{
@@ -103,7 +132,7 @@ button.btn_Editar {
 }
 
 button.btn_Excluir {
-    background-color: #dc3545;
+    background-color: var(--cor-erro);
 }
 
 button.btn_Editar:hover {
