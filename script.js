@@ -4,14 +4,14 @@ const cpf_Input   = document.getElementById('cpf');
 const tel_Input   = document.getElementById('tel');
 const email_Input = document.getElementById('email');
 
+// Referencias para elementos do modal de edição do contato
 const edita_Nome  = document.getElementById('edita_Nome')
 const edita_Cpf   = document.getElementById('edita_Cpf')
-const edita_Tel = document.getElementById('edita_Tel')
+const edita_Tel   = document.getElementById('edita_Tel')
 const edita_Email = document.getElementById('edita_Email')
 
 // Variável para acompanhar o índice do contato em edição
 let editingContactIndex = -1;
-
 
 //======================================//
 // Funções para formatar e validar campos
@@ -141,12 +141,10 @@ function valida_Email(email) {
     return true; // E-mail válido
 }
 
-
 //===================================//
 // Funções para manipulação dos dados 
 //===================================//
 
-// Adicionar um novo contato
 function add_Contato(nome, cpf, tel, email) {
 
      // Realize as validações aqui
@@ -166,16 +164,16 @@ function add_Contato(nome, cpf, tel, email) {
         return;
     }
 
-    const contactList = JSON.parse(localStorage.getItem('contacts')) || [];
+    const lista_Ctt_LStorage = JSON.parse(localStorage.getItem('contacts')) || [];
 
     // Verifique se o CPF já está registrado
-    if (contactList.some(contact => contact.cpf === cpf)) {
+    if (lista_Ctt_LStorage.some(contact => contact.cpf === cpf)) {
         alert('CPF já registrado. Não é permitido adicionar CPFs iguais.');
         return;
     }
 
-    contactList.push({ nome, cpf, tel, email });
-    localStorage.setItem('contacts', JSON.stringify(contactList));
+    lista_Ctt_LStorage.push({ nome, cpf, tel, email });
+    localStorage.setItem('contacts', JSON.stringify(lista_Ctt_LStorage));
     listContacts();
     clearForm();
 }
@@ -183,8 +181,8 @@ function add_Contato(nome, cpf, tel, email) {
 // Editar um contato existente *
 function editar_Contato(index) {
     
-    const contactList = JSON.parse(localStorage.getItem('contacts')) || [];
-    const contact     = contactList[index];
+    const lista_Ctt_LStorage = JSON.parse(localStorage.getItem('contacts')) || [];
+    const contact     = lista_Ctt_LStorage[index];
     const editModal = document.querySelector('.editModal');
 
     if (!contact) return;
@@ -270,19 +268,19 @@ function editar_Contato(index) {
 
 // Excluir um contato
 function excluir_Contato(index) {
-    const contactList = JSON.parse(localStorage.getItem('contacts')) || [];
-    contactList.splice(index, 1);
-    localStorage.setItem('contacts', JSON.stringify(contactList));
+    const lista_Ctt_LStorage = JSON.parse(localStorage.getItem('contacts')) || [];
+    lista_Ctt_LStorage.splice(index, 1);
+    localStorage.setItem('contacts', JSON.stringify(lista_Ctt_LStorage));
     listContacts();
 }
 
 // Atualizar um contato existente
 function updateContact(nome, cpf, tel, email) {
-    const contactList = JSON.parse(localStorage.getItem('contacts')) || [];
+    const lista_Ctt_LStorage = JSON.parse(localStorage.getItem('contacts')) || [];
 
-    if (editingContactIndex >= 0 && editingContactIndex < contactList.length) {
-        contactList[editingContactIndex] = { nome, cpf, tel, email };
-        localStorage.setItem('contacts', JSON.stringify(contactList));
+    if (editingContactIndex >= 0 && editingContactIndex < lista_Ctt_LStorage.length) {
+        lista_Ctt_LStorage[editingContactIndex] = { nome, cpf, tel, email };
+        localStorage.setItem('contacts', JSON.stringify(lista_Ctt_LStorage));
         listContacts();
         editingContactIndex = -1;
         clearForm();
@@ -291,12 +289,12 @@ function updateContact(nome, cpf, tel, email) {
 
 // Listar os contatos na tabela
 function listContacts() {
-    const contactList = JSON.parse(localStorage.getItem('contacts')) || [];
+    const lista_Ctt_LStorage = JSON.parse(localStorage.getItem('contacts')) || [];
     const contactTable = document.getElementById('contact-list');
 
     contactTable.innerHTML = '';
 
-    contactList.forEach((contact, index) => {
+    lista_Ctt_LStorage.forEach((contact, index) => {
         const row = contactTable.insertRow();
 
         // Crie células para o nome, telefone, e-mail e ações do contato
@@ -337,7 +335,7 @@ function filterContacts() {
     contactRows.forEach((row) => {
         const nome  = row.cells[0].textContent.toLowerCase();
         const cpf   = row.cells[1].textContent.toLowerCase();
-        const tel = row.cells[2].textContent.toLowerCase();
+        const tel   = row.cells[2].textContent.toLowerCase();
         const email = row.cells[3].textContent.toLowerCase();
 
         if (nome.includes(searchTerm)  
@@ -362,7 +360,7 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
 
     const nome  = nome_Input.value;
     const cpf   = cpf_Input.value;
-    const tel = tel_Input.value;
+    const tel   = tel_Input.value;
     const email = email_Input.value;
 
     if (editingContactIndex === -1) {
@@ -399,9 +397,9 @@ edita_Tel.addEventListener('input', () => {
 //=============================================//
 
 function clearForm() {
-    nome_Input.value = '';
-    cpf_Input.value = '';
-    tel_Input.value = '';
+    nome_Input.value  = '';
+    cpf_Input.value   = '';
+    tel_Input.value   = '';
     email_Input.value = '';
     
     // Restaure o botão "Adicionar" após a limpeza
