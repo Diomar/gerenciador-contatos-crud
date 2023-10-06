@@ -142,10 +142,10 @@ function valida_Email(email) {
 }
 
 //===================================//
-// Funções para manipulação dos dados 
+// Funções para manipular os dados 
 //===================================//
 
-function add_Contato(nome, cpf, tel, email) {
+function add_Ctt(nome, cpf, tel, email) {
 
      // Realize as validações aqui
      if (!valida_Nome(nome)) {
@@ -174,12 +174,12 @@ function add_Contato(nome, cpf, tel, email) {
 
     lista_Ctt_LStorage.push({ nome, cpf, tel, email });
     localStorage.setItem('contacts', JSON.stringify(lista_Ctt_LStorage));
-    listContacts();
-    clearForm();
+    listar_Contatos();
+    limpar_Form();
 }
 
 // Editar um contato existente *
-function editar_Contato(index) {
+function editar_Ctt(index) {
     
     const lista_Ctt_LStorage = JSON.parse(localStorage.getItem('contacts')) || [];
     const contact     = lista_Ctt_LStorage[index];
@@ -197,7 +197,7 @@ function editar_Contato(index) {
     editModal.style.display = 'block';
 
     const fechaModalElement = document.querySelector('.fechaModal');
-    const btnCancelar = document.getElementById('btnCancelar');
+    const btn_Cancelar = document.getElementById('btn_Cancelar');
     
     // Event listener para formatar o CPF enquanto o usuário digita
     edita_Cpf.addEventListener('input', () => {
@@ -210,7 +210,7 @@ function editar_Contato(index) {
 
     // Adicione eventos de clique para ambos os elementos
     fechaModalElement.addEventListener('click', fechaModal)
-    btnCancelar.addEventListener('click', fechaModal);
+    btn_Cancelar.addEventListener('click', fechaModal);
    
     const salvar_Alteracoes = document.getElementById("salvar_Alteracoes");
 
@@ -243,7 +243,7 @@ function editar_Contato(index) {
         }
     
         // Atualize o contato existente com as informações editadas
-        updateContact(editedName, editedCpf, editedPhone, editedEmail);
+        atualizar_Ctt(editedName, editedCpf, editedPhone, editedEmail);
         
         // Feche o modal de edição
         const editModal = document.querySelector('.editModal');
@@ -265,28 +265,28 @@ function editar_Contato(index) {
 }
 
 // Excluir um contato
-function excluir_Contato(index) {
+function excluir_Ctt(index) {
     const lista_Ctt_LStorage = JSON.parse(localStorage.getItem('contacts')) || [];
     lista_Ctt_LStorage.splice(index, 1);
     localStorage.setItem('contacts', JSON.stringify(lista_Ctt_LStorage));
-    listContacts();
+    listar_Contatos();
 }
 
 // Atualizar um contato existente
-function updateContact(nome, cpf, tel, email) {
+function atualizar_Ctt(nome, cpf, tel, email) {
     const lista_Ctt_LStorage = JSON.parse(localStorage.getItem('contacts')) || [];
 
     if (editingContactIndex >= 0 && editingContactIndex < lista_Ctt_LStorage.length) {
         lista_Ctt_LStorage[editingContactIndex] = { nome, cpf, tel, email };
         localStorage.setItem('contacts', JSON.stringify(lista_Ctt_LStorage));
-        listContacts();
+        listar_Contatos();
         editingContactIndex = -1;
-        clearForm();
+        limpar_Form();
     }
 }
 
 // Listar os contatos na tabela
-function listContacts() {
+function listar_Contatos() {
     const lista_Ctt_LStorage = JSON.parse(localStorage.getItem('contacts')) || [];
     const contactTable = document.getElementById('contact-list');
 
@@ -312,12 +312,12 @@ function listContacts() {
         const btn_Editar = document.createElement('button');
         btn_Editar.textContent = 'Editar';
         btn_Editar.className   = 'btn_Editar';
-        btn_Editar.addEventListener('click', () => editar_Contato(index));
+        btn_Editar.addEventListener('click', () => editar_Ctt(index));
 
         const btn_Excluir = document.createElement('button');
         btn_Excluir.textContent = 'Excluir';
         btn_Excluir.className   = 'btn_Excluir';
-        btn_Excluir.addEventListener('click', () => excluir_Contato(index));
+        btn_Excluir.addEventListener('click', () => excluir_Ctt(index));
 
         // Adicione os botões à célula de ações
         actionsCell.appendChild(btn_Editar);
@@ -326,7 +326,7 @@ function listContacts() {
 }
 
 // Filtrar contatos com base na pesquisa
-function filterContacts() {
+function filtrar_Ctt() {
     const searchTerm  = document.getElementById('search').value.toLowerCase();
     const contactRows = document.querySelectorAll('#contact-list tr');
 
@@ -363,16 +363,16 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
     if (editingContactIndex === -1) {
 
         //Chama a função adicionar contato
-        add_Contato(nome, cpf, tel, email);
+        add_Ctt(nome, cpf, tel, email);
 
     } else {
         // Chama a função atualizar contato 
-        updateContact(nome, cpf, tel, email); 
+        atualizar_Ctt(nome, cpf, tel, email); 
     }
 });
 
 // EventListener campo de pesquisa
-document.getElementById('search').addEventListener('input', filterContacts);
+document.getElementById('search').addEventListener('input', filtrar_Ctt);
 
 // EventListener campo de telefone
 tel_Input.addEventListener('input', () => {
@@ -393,7 +393,7 @@ edita_Tel.addEventListener('input', () => {
 // Funções relacionadas à interface do usuário
 //=============================================//
 
-function clearForm() {
+function limpar_Form() {
     nome_Input.value  = '';
     cpf_Input.value   = '';
     tel_Input.value   = '';
@@ -405,4 +405,4 @@ function clearForm() {
 }
 
 // Inicializa a lista de contatos ao carregar a página
-listContacts();
+listar_Contatos();
