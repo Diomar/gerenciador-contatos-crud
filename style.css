@@ -7,21 +7,21 @@
   }
 
 body {
-    font-family: Arial, sans-serif; /* Substitua 'Arial, sans-serif' pela fonte desejada */
-    font-size: 16px; /* Defina o tamanho da fonte desejado */
-    font-weight: normal; /* Defina o peso da fonte (normal, bold, etc.) */
-    color: #333; /* Defina a cor do texto */
+    font-family: Arial, sans-serif; 
+    font-size: 16px; 
+    font-weight: normal; 
+    color: #333; 
 }
       
 :root{
-  --cor-primaria: #007BFF;      /* Azul primário */
-  --cor-secundaria: #6C757D;    /* Cinza secundário */
-  --cor-fundo: #FFFFFF;         /* Branco para fundo */
-  --cor-texto: #333333;         /* Texto principal em preto */
-  --cor-destaque: #FFA500;      /* Cor de destaque (laranja) */
-  --cor-sucesso: #28A745;       /* Cor para operações de sucesso (verde) */
-  --cor-erro: #DC3545;          /* Cor para mensagens de erro (vermelho) */
-  --cor-link: #007BFF;          /* Cor para links (azul) */
+  --cor-primaria: #1a6fc9;      
+  --cor-secundaria: #6C757D;    
+  --cor-fundo: #FFFFFF;         
+  --cor-texto: #333333;         
+  --cor-destaque: #FFA500;      
+  --cor-sucesso: #28A745;       
+  --cor-erro: #DC3545;          
+     
 }
 
 .menu{
@@ -161,13 +161,12 @@ th, td {
 
 th {
     text-align: start;
-    background-color: #007bff;
+    background-color: var(--cor-secundaria);
 }
 
 .title_edit{
     padding-bottom: 15px;
-    text-transform: uppercase;
-    
+    text-transform: uppercase; 
 }
 /* Estilo para o modal de edição */
 .editModal {
@@ -186,6 +185,8 @@ th {
 .modal-content {
     display: flex;
     flex-direction: column;
+    position: relative; 
+
     align-items: center;
     background-color: #fefefe;
     margin: 6% auto;
@@ -195,25 +196,24 @@ th {
     width: 40%;
 }
 
+.fechaModal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+
 /* Estilo para o botão de fechar do modal */
 .close {
-    display: flex;
-    color: #aaa;
+    color: var(--cor-secundaria);
     float: right;
     font-size: 28px;
     font-weight: bold;
+    align-items: end;
 }
 
-.fechaModal{
-    display: flex;
-    width: 100%;
-    justify-content: end;
-}
-
-.close:hover,
-.close:focus {
+.close:hover {
     color: black;
-    text-decoration: none;
     cursor: pointer;
 }
 
@@ -229,3 +229,6 @@ th {
         width: 100%;
     }
 }
+
+
+
