@@ -1,8 +1,8 @@
 // Variáveis para referenciar elementos do formulário
-const nameInput  = document.getElementById('name');
-const cpfInput   = document.getElementById('cpf');
-const phoneInput = document.getElementById('phone');
-const emailInput = document.getElementById('email');
+const nome_Input  = document.getElementById('nome');
+const cpf_Input   = document.getElementById('cpf');
+const tel_Input = document.getElementById('tel');
+const email_Input = document.getElementById('email');
 
 // Variável para acompanhar o índice do contato em edição
 let editingContactIndex = -1;
@@ -12,8 +12,8 @@ let editingContactIndex = -1;
 // Funções para formatar e validar campos
 //======================================//
 
-function valida_Nome(name) {
-    if (name.trim() === '') {
+function valida_Nome(nome) {
+    if (nome.trim() === '') {
         return false;
     }
     return true;
@@ -89,9 +89,9 @@ function formata_Cpf(cpf) {
     return cpf;
 }
 
-function valida_Tel(phone) {
+function valida_Tel(tel) {
     // Remove todos os caracteres não numéricos
-    const numericPhone = phone.replace(/\D/g, '');
+    const numericPhone = tel.replace(/\D/g, '');
 
     // Verifique se o número de telefone tem pelo menos 8 dígitos
     if (numericPhone.length < 8) {
@@ -103,9 +103,9 @@ function valida_Tel(phone) {
     return true; // Número de telefone válido
 }
 
-function formata_Tel(phoneInput) {
+function formata_Tel(tel_Input) {
 
-    const phoneNumber = phoneInput.value.replace(/\D/g, '');
+    const phoneNumber = tel_Input.value.replace(/\D/g, '');
 
     let formattedPhoneNumber = '';
 
@@ -121,7 +121,7 @@ function formata_Tel(phoneInput) {
         formattedPhoneNumber += `-${phoneNumber.substring(7, 11)}`;
     }
 
-    phoneInput.value = formattedPhoneNumber;
+    tel_Input.value = formattedPhoneNumber;
 }
 
 function valida_Email(email) {
@@ -142,10 +142,10 @@ function valida_Email(email) {
 //===================================//
 
 // Adicionar um novo contato
-function add_Contato(name, cpf, phone, email) {
+function add_Contato(nome, cpf, tel, email) {
 
      // Realize as validações aqui
-     if (!valida_Nome(name)) {
+     if (!valida_Nome(nome)) {
         alert('Nome inválido.');
         return;
     }
@@ -156,7 +156,7 @@ function add_Contato(name, cpf, phone, email) {
         return;
     }
 
-    if (!valida_Tel(phone)) {
+    if (!valida_Tel(tel)) {
         alert('Telefone inválido.');
         return;
     }
@@ -169,7 +169,7 @@ function add_Contato(name, cpf, phone, email) {
         return;
     }
 
-    contactList.push({ name, cpf, phone, email });
+    contactList.push({ nome, cpf, tel, email });
     localStorage.setItem('contacts', JSON.stringify(contactList));
     listContacts();
     clearForm();
@@ -184,9 +184,9 @@ function editar_Contato(index) {
 
     if (!contact) return;
 
-    editName.value  = contact.name;
+    editName.value  = contact.nome;
     editCpf.value   = contact.cpf;
-    editPhone.value = contact.phone;
+    editPhone.value = contact.tel;
     editEmail.value = contact.email;
 
     editingContactIndex = index;
@@ -272,11 +272,11 @@ function excluir_Contato(index) {
 }
 
 // Atualizar um contato existente
-function updateContact(name, cpf, phone, email) {
+function updateContact(nome, cpf, tel, email) {
     const contactList = JSON.parse(localStorage.getItem('contacts')) || [];
 
     if (editingContactIndex >= 0 && editingContactIndex < contactList.length) {
-        contactList[editingContactIndex] = { name, cpf, phone, email };
+        contactList[editingContactIndex] = { nome, cpf, tel, email };
         localStorage.setItem('contacts', JSON.stringify(contactList));
         listContacts();
         editingContactIndex = -1;
@@ -302,9 +302,9 @@ function listContacts() {
         const actionsCell = row.insertCell(4);
 
         // Preencha as células com os dados do contato
-        nameCell.textContent  = contact.name;
+        nameCell.textContent  = contact.nome;
         cpfCell.textContent   = contact.cpf;
-        phoneCell.textContent = contact.phone;
+        phoneCell.textContent = contact.tel;
         emailCell.textContent = contact.email;
 
         // Cria os botões de "Editar" e "Excluir" para cada contato
@@ -330,14 +330,14 @@ function filterContacts() {
     const contactRows = document.querySelectorAll('#contact-list tr');
 
     contactRows.forEach((row) => {
-        const name  = row.cells[0].textContent.toLowerCase();
+        const nome  = row.cells[0].textContent.toLowerCase();
         const cpf   = row.cells[1].textContent.toLowerCase();
-        const phone = row.cells[2].textContent.toLowerCase();
+        const tel = row.cells[2].textContent.toLowerCase();
         const email = row.cells[3].textContent.toLowerCase();
 
-        if (name.includes(searchTerm)  
+        if (nome.includes(searchTerm)  
             || cpf.includes(searchTerm)   
-            || phone.includes(searchTerm) 
+            || tel.includes(searchTerm) 
             || email.includes(searchTerm)) {
             row.style.display = ''; // Exibe a linha se corresponder à pesquisa
         } else {
@@ -355,19 +355,19 @@ function filterContacts() {
 document.getElementById('contact-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const name  = nameInput.value;
-    const cpf   = cpfInput.value;
-    const phone = phoneInput.value;
-    const email = emailInput.value;
+    const nome  = nome_Input.value;
+    const cpf   = cpf_Input.value;
+    const tel = tel_Input.value;
+    const email = email_Input.value;
 
     if (editingContactIndex === -1) {
 
         //Chama a função adicionar contato
-        add_Contato(name, cpf, phone, email);
+        add_Contato(nome, cpf, tel, email);
 
     } else {
         // Chama a função atualizar contato 
-        updateContact(name, cpf, phone, email); 
+        updateContact(nome, cpf, tel, email); 
     }
 });
 
@@ -375,14 +375,14 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
 document.getElementById('search').addEventListener('input', filterContacts);
 
 // EventListener campo de telefone
-phoneInput.addEventListener('input', () => {
-    formata_Tel(phoneInput);
+tel_Input.addEventListener('input', () => {
+    formata_Tel(tel_Input);
 });
 // EventListener campo de cpf
-cpfInput.addEventListener('input', () => {
-    let cpf = cpfInput.value;
+cpf_Input.addEventListener('input', () => {
+    let cpf = cpf_Input.value;
         cpf = formata_Cpf(cpf);
-    cpfInput.value = cpf;
+    cpf_Input.value = cpf;
 });
 
 // EventListener campo telefone do modal de edição
@@ -394,10 +394,10 @@ editPhone.addEventListener('input', () => {
 //=============================================//
 
 function clearForm() {
-    nameInput.value = '';
-    cpfInput.value = '';
-    phoneInput.value = '';
-    emailInput.value = '';
+    nome_Input.value = '';
+    cpf_Input.value = '';
+    tel_Input.value = '';
+    email_Input.value = '';
     
     // Restaure o botão "Adicionar" após a limpeza
     const addButton = document.querySelector('form button');
