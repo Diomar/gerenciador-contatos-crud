@@ -1,8 +1,13 @@
 // Variáveis para referenciar elementos do formulário
 const nome_Input  = document.getElementById('nome');
 const cpf_Input   = document.getElementById('cpf');
-const tel_Input = document.getElementById('tel');
+const tel_Input   = document.getElementById('tel');
 const email_Input = document.getElementById('email');
+
+const edita_Nome  = document.getElementById('edita_Nome')
+const edita_Cpf   = document.getElementById('edita_Cpf')
+const edita_Tel = document.getElementById('edita_Tel')
+const edita_Email = document.getElementById('edita_Email')
 
 // Variável para acompanhar o índice do contato em edição
 let editingContactIndex = -1;
@@ -184,10 +189,10 @@ function editar_Contato(index) {
 
     if (!contact) return;
 
-    editName.value  = contact.nome;
-    editCpf.value   = contact.cpf;
-    editPhone.value = contact.tel;
-    editEmail.value = contact.email;
+    edita_Nome.value  = contact.nome;
+    edita_Cpf.value   = contact.cpf;
+    edita_Tel.value   = contact.tel;
+    edita_Email.value = contact.email;
 
     editingContactIndex = index;
     
@@ -197,8 +202,8 @@ function editar_Contato(index) {
     const btnCancelar = document.getElementById('btnCancelar');
     
     // Event listener para formatar o CPF enquanto o usuário digita
-    editCpf.addEventListener('input', () => {
-        editCpf.value = formata_Cpf(editCpf.value);
+    edita_Cpf.addEventListener('input', () => {
+        edita_Cpf.value = formata_Cpf(edita_Cpf.value);
     });
 
     function fechaModal() {
@@ -215,10 +220,10 @@ function editar_Contato(index) {
 
     function onClickSalvarAlteracoes() {
         // Obtém os valores dos campos a serem editados
-        const editedName  = editName.value;
-        const editedCpf   = editCpf.value;
-        const editedPhone = editPhone.value;
-        const editedEmail = editEmail.value;
+        const editedName  = edita_Nome.value;
+        const editedCpf   = edita_Cpf.value;
+        const editedPhone = edita_Tel.value;
+        const editedEmail = edita_Email.value;
  
         // Realize as validações aqui
         if (!valida_Nome(editedName)) {
@@ -386,8 +391,8 @@ cpf_Input.addEventListener('input', () => {
 });
 
 // EventListener campo telefone do modal de edição
-editPhone.addEventListener('input', () => {
-    formata_Tel(editPhone);
+edita_Tel.addEventListener('input', () => {
+    formata_Tel(edita_Tel);
 });
 
 // Funções relacionadas à interface do usuário
