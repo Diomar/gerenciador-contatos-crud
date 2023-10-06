@@ -13,9 +13,9 @@ const edita_Email = document.getElementById('edita_Email')
 // Variável para acompanhar o índice do contato em edição
 let editingContactIndex = -1;
 
-//======================================//
+//=======================================//
 // Funções para formatar e validar campos
-//======================================//
+//=======================================//
 
 function valida_Nome(nome) {
     if (nome.trim() === '') {
@@ -211,12 +211,10 @@ function editar_Contato(index) {
     // Adicione eventos de clique para ambos os elementos
     fechaModalElement.addEventListener('click', fechaModal)
     btnCancelar.addEventListener('click', fechaModal);
-
-// Em desenvolvimento========================================================================================================
    
-    const salvarAlteracoes = document.getElementById("salvarAlteracoes");
+    const salvar_Alteracoes = document.getElementById("salvar_Alteracoes");
 
-    function onClickSalvarAlteracoes() {
+    function onClickSalvar_Alteracoes() {
         // Obtém os valores dos campos a serem editados
         const editedName  = edita_Nome.value;
         const editedCpf   = edita_Cpf.value;
@@ -252,18 +250,18 @@ function editar_Contato(index) {
         editModal.style.display = 'none';
     
         // Remova o ouvinte de evento após a execução bem-sucedida
-        salvarAlteracoes.removeEventListener('click', onClickSalvarAlteracoes);
+        salvar_Alteracoes.removeEventListener('click', onClickSalvar_Alteracoes);
     }
 
     // Adicione um ouvinte de evento para o clique no botão "Salvar Alterações"
-    salvarAlteracoes.addEventListener('click', onClickSalvarAlteracoes);
+    salvar_Alteracoes.addEventListener('click', onClickSalvar_Alteracoes);
 
 
      // Remova os ouvintes de evento existentes
-     salvarAlteracoes.removeEventListener('click', onClickSalvarAlteracoes);
+     salvar_Alteracoes.removeEventListener('click', onClickSalvar_Alteracoes);
 
      // Adicione um novo ouvinte de evento para o clique no botão "Salvar Alterações"
-     salvarAlteracoes.addEventListener('click', onClickSalvarAlteracoes);
+     salvar_Alteracoes.addEventListener('click', onClickSalvar_Alteracoes);
 }
 
 // Excluir um contato
@@ -348,7 +346,6 @@ function filterContacts() {
         }
     });
 }
-
 
 //===================================//
 // Eventos 
