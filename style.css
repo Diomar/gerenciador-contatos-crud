@@ -13,7 +13,7 @@ body {
     color: #333; /* Defina a cor do texto */
 }
       
-  :root {
+:root{
   --cor-primaria: #007BFF;      /* Azul primário */
   --cor-secundaria: #6C757D;    /* Cinza secundário */
   --cor-fundo: #FFFFFF;         /* Branco para fundo */
@@ -24,7 +24,7 @@ body {
   --cor-link: #007BFF;          /* Cor para links (azul) */
 }
 
-  .menu{
+.menu{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -35,9 +35,9 @@ body {
     background-color: var(--cor-primaria);
     margin-bottom: 15px;
     color: white;
-  }
+}
 
-  #search{
+#search{
     width: 50%;
     margin-top: 10px;
   }
@@ -79,7 +79,7 @@ input[type="tel"],
 input[type="email"] {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
@@ -164,6 +164,11 @@ th {
     background-color: #007bff;
 }
 
+.title_edit{
+    padding-bottom: 15px;
+    text-transform: uppercase;
+    
+}
 /* Estilo para o modal de edição */
 .editModal {
     display: none;

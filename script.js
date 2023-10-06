@@ -398,10 +398,6 @@ function limpar_Form() {
     cpf_Input.value   = '';
     tel_Input.value   = '';
     email_Input.value = '';
-    
-    // Restaure o botão "Adicionar" após a limpeza
-    // const addButton = document.querySelector('form button');
-    // addButton.textContent = 'Adicionar';
 }
 
 // Inicializa a lista de contatos ao carregar a página
