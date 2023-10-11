@@ -22,6 +22,7 @@
 
 ### Listagem de Contatos: 
 > A função listar_Contatos exibe os contatos na tabela HTML, iterando sobre
+>
 > 
 > eles e criando linhas na tabela.
 
