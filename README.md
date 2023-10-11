@@ -1,4 +1,6 @@
 # Gerenciador de contatos - CRUD 📚 🚀 🎯
+> Acesse ao vivo
+[crud-gerenciador-de-contatos](crud-gerenciador-de-contatos.netlify.app/)
 
 > Este projeto é um aplicativo CRUD (Create, Read, Update, Delete) para o gerenciamento de contatos. Ele foi desenvolvido com Javascript, html, css e inclui as seguintes funcionalidades e conceitos-chave:
 
