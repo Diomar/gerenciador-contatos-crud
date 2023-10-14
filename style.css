@@ -1,0 +1,244 @@
+/*  ============================================
+    Estilos globais  
+    ==========================================*/
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+  }
+
+body {
+    font-family: Arial, sans-serif; 
+    font-size: 16px; 
+    font-weight: normal; 
+    color: #333; 
+    
+}
+      
+:root{
+  --cor-primaria: #1a6fc9;      
+  --cor-secundaria: #6C757D;    
+  --cor-fundo: #FFFFFF;         
+  --cor-texto: #333333;         
+  --cor-destaque: #FFA500;      
+  --cor-sucesso: #28A745;       
+  --cor-erro: #DC3545;          
+     
+}
+
+.menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    height: 70px;
+    background-color: var(--cor-primaria);
+    margin-bottom: 15px;
+    color: white;
+}
+
+#search{
+    width: 50%;
+    margin-top: 10px;
+  }
+
+.container-form{
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    max-width: 30%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    display: flex;
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    width: 100%;
+    max-width: 400px;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+/*  ============================================
+    Estilo dos botões 
+    ==========================================*/
+
+button {
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button#btn_Cancelar {
+    background-color: var(--cor-secundaria);
+}
+
+button#btn_Cancelar:hover {
+    background-color: #425f7e;
+}
+
+button#salvar_Alteracoes{
+    background-color: var(--cor-primaria);
+}
+
+button#salvar_Alteracoes:hover{
+    background-color: rgb(0, 78, 245);
+}
+
+button.btn_Adicionar {
+    background-color: var(--cor-primaria);
+}
+button.btn_Adicionar:hover {
+    background-color: rgb(0, 78, 245);
+}
+
+button.adicionar:hover{
+    background-color: rgb(0, 78, 245);
+    transition:  0.3s; 
+}
+
+button.btn_Editar {
+    background-color: #f7b900;
+    margin-right: 5px;
+}
+
+button.btn_Excluir {
+    background-color: var(--cor-erro);
+}
+
+button.btn_Editar:hover {
+    background-color: #e7ad00;
+    transition:  0.3s; 
+}
+
+button.btn_Excluir:hover {
+    background-color: #bd0719;
+    transition:  0.3s; 
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: start;
+    border: 1px solid #ccc;
+}
+
+th {
+    text-align: start;
+    background-color: var(--cor-secundaria);
+}
+
+.title_edit{
+    padding-bottom: 15px;
+    text-transform: uppercase; 
+}
+
+
+/*  ==================================
+    Estilo para o modal de edição 
+    =============================== */
+
+.editModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+/*  ================================== 
+    Conteúdo do modal de edição 
+    =============================== */
+    
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    position: relative; 
+
+    align-items: center;
+    background-color: #fefefe;
+    margin: 6% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 5px;
+    width: 40%;
+}
+
+.fechaModal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+
+/*==================================
+    Estilo para o botão de fechar do modal 
+/===========================================*/
+.close {
+    color: var(--cor-secundaria);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    align-items: end;
+}
+
+.close:hover {
+    color: black;
+    cursor: pointer;
+}
+
+/* Estilos para celular (tela estreita) */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"] {
+        width: 100%;
+    }
+}
