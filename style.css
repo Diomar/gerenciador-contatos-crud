@@ -1,6 +1,8 @@
+
 /*  ============================================
     Estilos globais  
     ==========================================*/
+
 *{
     box-sizing: border-box;
     padding: 0;
@@ -27,25 +29,63 @@ body {
      
 }
 
-.menu{
+/* Estilo do header */
+header{
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 100%;
     width: 100%;
     height: 70px;
     background-color: var(--cor-primaria);
-    margin-bottom: 15px;
     color: white;
 }
+.main {
+    display: flex;
+    background-color: #f9f9f9;
+    flex-direction: column;
+    align-items: center;
+}
 
+.container{
+    display: flex;
+    width: 80%;
+    padding: 20px 0;
+}
+
+.section-form{
+    display: flex;
+    justify-content: center;
+}
+
+.contatos__form{
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px 0 #c4c4c4;
+
+    
+}
+.section-pesquisa{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+/* Estilo do campo de pesquisa */
 #search{
     width: 50%;
     margin-top: 10px;
   }
 
-.container-form{
+
+
+
+/*  ==========================================
+    Estilo para o formulário
+/   ========================================*/
+
+/*  Estilo do container ====================*/
+.contatos-form{
     display: flex;
     margin: 0 auto;
     justify-content: center;
@@ -53,22 +93,13 @@ body {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #f9f9f9;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.container {
-    display: flex;
-    max-width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 5px;
-}
 
+
+/*  Estilo para o formulário pessoal =======*/
 form {
     display: flex;
     flex-direction: column;
@@ -172,27 +203,10 @@ th {
     text-transform: uppercase; 
 }
 
-
-/*  ==================================
-    Estilo para o modal de edição 
-    =============================== */
-
-.editModal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-
 /*  ================================== 
-    Conteúdo do modal de edição 
+    Estilo do modal de edição 
     =============================== */
-    
+
 .modal-content {
     display: flex;
     flex-direction: column;
@@ -207,6 +221,18 @@ th {
     width: 40%;
 }
 
+.editModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
 .fechaModal {
     position: absolute;
     top: 10px;
@@ -214,8 +240,9 @@ th {
     cursor: pointer;
 }
 
-/*==================================
-    Estilo para o botão de fechar do modal 
+
+/*============================================
+    Estilo para o span de fechar do modal 
 /===========================================*/
 .close {
     color: var(--cor-secundaria);
@@ -230,6 +257,16 @@ th {
     cursor: pointer;
 }
 
+
+/*  Estilo do footer ========================*/
+    /* footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80px;
+        background-color: rgb(8, 6, 6);
+    } */
+
 /* Estilos para celular (tela estreita) */
 @media (max-width: 768px) {
     .container {
@@ -242,3 +279,8 @@ th {
         width: 100%;
     }
 }
+
+
+
+
+

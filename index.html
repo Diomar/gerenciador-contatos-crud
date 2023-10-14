@@ -9,26 +9,26 @@
 
 <body>
     <header>
-        <div class="menu">
-            <h1>Cadastro de contatos</h1>
-        </div>
+        <h1>Gerenciador de contatos</h1>
     </header>
 
-    <div class="container-form">  
-        <form class="contatos__form" id="contact-form">         
-            <input  type="text"   id="nome"  placeholder="Nome"     required>
-            <input  type="text"   id="cpf"   placeholder="Cpf"      required>
-            <input  type="tel"    id="tel" placeholder="Telefone" required>
-            <input  type="email"  id="email" placeholder="Email"    required>
-            <button type="submit" class="btn_Adicionar">Adicionar</button>
-        </form>
-    </div>
+    <div class="main"> 
 
-    <div class="container"> 
-        <h2>Lista de Contatos</h2>
+        <section class="section-form container">
+            <form class="contatos__form" id="contact-form">         
+                <input  type="text"   id="nome"  placeholder="Nome"     required>
+                <input  type="text"   id="cpf"   placeholder="Cpf"      required>
+                <input  type="tel"    id="tel" placeholder="Telefone" required>
+                <input  type="email"  id="email" placeholder="Email"    required>
+                <button type="submit" class="btn_Adicionar">Adicionar</button>
+            </form>            
+        </section>
 
-        <input type="text" id="search" placeholder="Pesquisar contato">
-        
+        <section class="section-pesquisa container">
+            <input type="text" id="search" placeholder="Pesquisar contato">
+        </section>
+            <h2>Lista de Contatos</h2>
+
         <table>
             <thead>
                 <tr>
@@ -52,7 +52,7 @@
 
         <!-- Modal para editar contato -->
         <div class="editModal">
-            <div class="modal-content">  
+            <div class="modal-content container">  
 
                 <div class="fechaModal">
                     <span class="close" id="closeModal">&times;</span>
@@ -75,5 +75,7 @@
         </div>
     </div>
     <script src="script.js" defer></script>
+    <footer>
+    </footer>
 </body>
 </html>
