@@ -39,6 +39,8 @@ header{
     background-color: var(--cor-primaria);
     color: white;
 }
+
+
 .main {
     display: flex;
     background-color: #f9f9f9;
@@ -195,7 +197,7 @@ th, td {
 
 th {
     text-align: start;
-    background-color: var(--cor-secundaria);
+    background-color:  #e2e2e2
 }
 
 .title_edit{
